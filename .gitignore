@@ -1,3 +1,10 @@
 # Environment variables
 *.env
 !.env.example
+
+# Logs & archives
+*.log
+*.tar
+
+# Notes
+notasgenerales.md
