@@ -71,6 +71,33 @@ services:
       retries: 5
       start_period: 15s
 
+  #===============================================================
+  #==========================4. MongoDB Community Server
+  #===============================================================
+  mongo-cloud:
+    image: mongodb/mongodb-community-server:9.0-ubi9-slim
+    container_name: campuscloud-mongodb
+    restart: always
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGODB_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGODB_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    ports:
+      - "${MONGO_PORT}:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - campuscloud_net
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "mongosh --quiet --eval 'db.adminCommand(\"ping\")' || exit 1"
+      ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
 #===============================================================
 #==========================VOLÚMENES
 #===============================================================
@@ -86,6 +113,10 @@ volumes:
   sqlserver_data:
     external: true
     name: ${SQLSERVER_VOLUME}
+
+  mongo_data:
+    external: true
+    name: ${MONGO_VOLUME}
 
 #===============================================================
 #==========================RED
