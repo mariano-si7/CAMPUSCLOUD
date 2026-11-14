@@ -1,4 +1,5 @@
-# Script para desplegar SQL Server 2025 en Docker conectado a campuscloud_net
+# Script para desplegar SQL Server en Docker conectado a campuscloud-db-net
+docker network create campuscloud-db-net 2>$null
 
 docker run -d `
   --name campuscloud-sqlserver `
@@ -7,4 +8,4 @@ docker run -d `
   --env-file "$PSScriptRoot\.env" `
   -v campuscloud-sqlserver-data:/var/opt/mssql `
   --restart=always `
-  mcr.microsoft.com/mssql/server:2025-CU8-ubuntu-24.04
+  mcr.microsoft.com/mssql/server:2022-latest

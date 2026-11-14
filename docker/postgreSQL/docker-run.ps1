@@ -1,4 +1,5 @@
 # Script para desplegar PostgreSQL en Docker conectado a campuscloud-db-net
+docker network create campuscloud-db-net 2>$null
 
 docker run -d `
   --name postgres-campuscloud `
@@ -7,4 +8,4 @@ docker run -d `
   --env-file "$PSScriptRoot\.env" `
   -v campuscloud-postgres-data:/var/lib/postgresql/data `
   --restart=always `
-  postgres:alpine
+  postgres:16-bookworm
