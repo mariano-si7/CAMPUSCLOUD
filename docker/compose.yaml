@@ -61,16 +61,16 @@ services:
       - campuscloud_net
 
   #===============================================================
-  # 4. MongoDB 8.0 (Unidad II - Sector Documental)
+  # 4. MongoDB Community (Unidad II - Sector Documental)
   #===============================================================
   mongodb:
-    image: mongo:8.0
-    container_name: campuscloud-mongo
+    image: mongodb/mongodb-community-server:9.0-ubi9-slim
+    container_name: campuscloud-mongodb
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-admin}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-CampusCloudMongo2026!}
-      MONGO_INITDB_DATABASE: ${MONGO_DATABASE:-CampusCloud}
+      MONGODB_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-admin}
+      MONGODB_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-CampusCloudMongo2026!}
+      MONGODB_INITDB_DATABASE: ${MONGO_DATABASE:-CampusCloud}
     ports:
       - "${MONGO_PORT:-27017}:27017"
     volumes:
@@ -132,16 +132,22 @@ services:
 #===============================================================
 volumes:
   sqlserver_data:
+    external: true
     name: ${SQLSERVER_VOLUME:-campuscloud-sqlserver-data}
   postgres_data:
+    external: true
     name: ${POSTGRES_VOLUME:-campuscloud-postgres-data}
   pgadmin_data:
+    external: true
     name: ${PGADMIN_VOLUME:-campuscloud-pgadmin-data}
   mongo_data:
+    external: true
     name: ${MONGO_VOLUME:-campuscloud-mongo-data}
   neo4j_data:
+    external: true
     name: ${NEO4J_VOLUME:-campuscloud-neo4j-data}
   cassandra_data:
+    external: true
     name: ${CASSANDRA_VOLUME:-campuscloud-cassandra-data}
 
 #===============================================================
@@ -149,4 +155,5 @@ volumes:
 #===============================================================
 networks:
   campuscloud_net:
+    external: true
     name: ${DOCKER_NETWORK:-campuscloud-db-net}
