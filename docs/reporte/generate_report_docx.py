@@ -1,3 +1,4 @@
+import os
 import docx
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -548,7 +549,7 @@ def create_report():
     add_bullet("Cloud SQL for SQL Server: Architecture, Storage and High Availability. Google Cloud Docs. https://cloud.google.com/sql/docs/sqlserver", "Google Cloud (2026). ")
 
     # Save docx
-    output_path = r"c:\REPOSITORIOS\CampusCloud\docs\ReporteTecnicoIntegrador_CampusCloud.docx"
+    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ReporteTecnicoIntegrador_CampusCloud.docx")
     doc.save(output_path)
     print(f"Document successfully created at: {output_path}")
 
