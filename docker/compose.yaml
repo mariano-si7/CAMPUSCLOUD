@@ -1,0 +1,152 @@
+services:
+  #===============================================================
+  # 1. SQL Server 2022 (Unidad I - Base Transaccional Principal)
+  #===============================================================
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: campuscloud-sqlserver
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-CampusCloud123$}
+    ports:
+      - "${MSSQL_PORT:-1434}:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - campuscloud_net
+
+  #===============================================================
+  # 2. PostgreSQL 16 (Unidad I - Soporte Relacional)
+  #===============================================================
+  postgres:
+    image: postgres:16-bookworm
+    container_name: campuscloud-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-CampusCloudPostgres#}
+      POSTGRES_DB: ${POSTGRES_DB:-CampusCloud}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - campuscloud_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-CampusCloud}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  #===============================================================
+  # 3. pgAdmin 4 (Unidad I - Administrador Web PostgreSQL)
+  #===============================================================
+  pgadmin:
+    image: dpage/pgadmin4:6.17
+    container_name: campuscloud-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@campuscloud.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-CampusCloud123$}
+    ports:
+      - "${PGADMIN_PORT:-8082}:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - campuscloud_net
+
+  #===============================================================
+  # 4. MongoDB 8.0 (Unidad II - Sector Documental)
+  #===============================================================
+  mongodb:
+    image: mongo:8.0
+    container_name: campuscloud-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-CampusCloudMongo2026!}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE:-CampusCloud}
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - campuscloud_net
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mongosh --quiet --username ${MONGO_INITDB_ROOT_USERNAME:-admin} --password ${MONGO_INITDB_ROOT_PASSWORD:-CampusCloudMongo2026!} --authenticationDatabase admin --eval \"db.adminCommand('ping').ok\" | grep 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  #===============================================================
+  # 5. Neo4j 5 Community (Unidad II - Red de Grafos Vengadora)
+  #===============================================================
+  neo4j:
+    image: neo4j:5-community
+    container_name: campuscloud-neo4j
+    restart: always
+    environment:
+      NEO4J_AUTH: ${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:-CampusCloudNeo4j2026!}
+      NEO4J_PLUGINS: '["apoc"]'
+    ports:
+      - "${NEO4J_HTTP_PORT:-7474}:7474"
+      - "${NEO4J_BOLT_PORT:-7687}:7687"
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - campuscloud_net
+
+  #===============================================================
+  # 6. Apache Cassandra 4.1 (Unidad II - Sector Columnas Anchas)
+  #===============================================================
+  cassandra:
+    image: cassandra:4.1
+    container_name: campuscloud-cassandra
+    restart: always
+    environment:
+      CASSANDRA_CLUSTER_NAME: ${CASSANDRA_CLUSTER_NAME:-CampusCloudCluster}
+      CASSANDRA_DC: "datacenter1"
+      CASSANDRA_RACK: "rack1"
+      CASSANDRA_ENDPOINT_SNITCH: "GossipingPropertyFileSnitch"
+      MAX_HEAP_SIZE: "1024M"
+      HEAP_NEWSIZE: "256M"
+    ports:
+      - "${CASSANDRA_PORT:-9042}:9042"
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    networks:
+      - campuscloud_net
+
+#===============================================================
+# VOLÚMENES PERSISTENTES
+#===============================================================
+volumes:
+  sqlserver_data:
+    name: ${SQLSERVER_VOLUME:-campuscloud-sqlserver-data}
+  postgres_data:
+    name: ${POSTGRES_VOLUME:-campuscloud-postgres-data}
+  pgadmin_data:
+    name: ${PGADMIN_VOLUME:-campuscloud-pgadmin-data}
+  mongo_data:
+    name: ${MONGO_VOLUME:-campuscloud-mongo-data}
+  neo4j_data:
+    name: ${NEO4J_VOLUME:-campuscloud-neo4j-data}
+  cassandra_data:
+    name: ${CASSANDRA_VOLUME:-campuscloud-cassandra-data}
+
+#===============================================================
+# RED DOCKER COMÚN
+#===============================================================
+networks:
+  campuscloud_net:
+    name: ${DOCKER_NETWORK:-campuscloud-db-net}

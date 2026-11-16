@@ -1,16 +1,23 @@
-# Environment variables
-*.env
+# Environment variables & secrets
+.env
+**/.env
 !.env.example
+!**/.env.example
 
 # Dependencies
 node_modules/
 
-# Python cache
+# Python cache & artifacts
 __pycache__/
 *.py[cod]
 
-# Logs & archives
+# Logs & temporals
 *.log
+*.tmp
+**/data/
+
+# Archives & binaries
+*.zip
 *.tar
 
 # Notes
