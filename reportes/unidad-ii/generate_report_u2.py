@@ -27,6 +27,7 @@ def create_report():
     navy = RGBColor(0x1B, 0x36, 0x5D)
     dark_gray = RGBColor(0x33, 0x41, 0x55)
     charcoal = RGBColor(0x1E, 0x29, 0x3B)
+    caption_color = RGBColor(0x47, 0x55, 0x69)
 
     def add_h1(text):
         p = doc.add_paragraph()
@@ -99,6 +100,28 @@ def create_report():
         p_space.paragraph_format.space_before = Pt(2)
         p_space.paragraph_format.space_after = Pt(6)
 
+    def add_figure(image_path, caption_text, width=Inches(6.2)):
+        if os.path.exists(image_path):
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.paragraph_format.space_before = Pt(8)
+            p_img.paragraph_format.space_after = Pt(3)
+            run_img = p_img.add_run()
+            run_img.add_picture(image_path, width=width)
+
+            p_cap = doc.add_paragraph()
+            p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_cap.paragraph_format.space_before = Pt(0)
+            p_cap.paragraph_format.space_after = Pt(10)
+            r_cap = p_cap.add_run(caption_text)
+            r_cap.font.name = "Calibri"
+            r_cap.font.size = Pt(9.5)
+            r_cap.font.italic = True
+            r_cap.font.color.rgb = caption_color
+
+    base_proj = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    evid_dir = os.path.join(base_proj, "evidencias", "unidad-ii")
+
     # ==========================================================
     # 1. PORTADA INSTITUCIONAL
     # ==========================================================
@@ -165,7 +188,7 @@ def create_report():
 
     headers_mod = ["Paradigma NoSQL", "Motor Elegido", "Caso de Uso en CampusCloud", "Justificación Técnica"]
     rows_mod = [
-        ["Documental", "MongoDB 8.0", "Catálogo dinámico de servicios extendidos", "Almacena documentos BSON semiestructurados con arrays de requisitos y subdocumentos de especificaciones técnicas sin alterar el esquema central."],
+        ["Documental", "MongoDB 9.0 Community", "Catálogo dinámico de servicios extendidos", "Almacena documentos BSON semiestructurados con arrays de requisitos y subdocumentos de especificaciones técnicas sin alterar el esquema central."],
         ["Grafos", "Neo4j 5 Community", "Red de alianzas, afinidades y recomendación", "Modela directamente a los estudiantes y servicios como nodos y sus interacciones como aristas tipadas con propiedades, optimizando algoritmos de grafos."],
         ["Columnas Anchas", "Apache Cassandra 4.1", "Bitácora masiva de telemetría y auditoría", "Escritura append-only ultrarrápida en disco (SSTables), consultas por partición de estudiante ('matricula') y orden temporal descendente."]
     ]
@@ -184,8 +207,8 @@ def create_report():
 |   RED DOCKER PUENTE: campuscloud-db-net                                         |
 |                                                                                 |
 |   +-----------------------+     +-----------------------+                       |
-|   | campuscloud-sqlserver |     |   campuscloud-mongo   |                       |
-|   | SQL Server 2022       |     |   MongoDB 8.0         |                       |
+|   | campuscloud-sqlserver |     |   campuscloud-mongodb |                       |
+|   | SQL Server 2022       |     |   MongoDB 9.0         |                       |
 |   | Puerto: 1434:1433     |     |   Puerto: 27017:27017 |                       |
 |   | Vol: sqlserver_data   |     |   Vol: mongo_data     |                       |
 |   +-----------+-----------+     +-----------+-----------+                       |
@@ -219,6 +242,9 @@ def create_report():
     add_bullet("Se configuraron límites de memoria ('MAX_HEAP_SIZE: 1024M', 'HEAP_NEWSIZE: 256M') para que Cassandra coexista con SQL Server, MongoDB y Neo4j sin saturar la RAM del host.", "Gestión de Recursos en Apache Cassandra: ")
     add_bullet("Cada servicio cuenta con variables parametrizadas con valores por defecto seguros para pruebas reproducibles.", "Parametrización Limpia: ")
 
+    img_docker = os.path.join(evid_dir, "generales", "01_docker_compose_ps.png")
+    add_figure(img_docker, "Figura 1: Estado operativo de todos los contenedores Docker de CampusCloud y diagnóstico del nodo Cassandra (UN - 100%).")
+
     # ==========================================================
     # 5. EVIDENCIAS: MONGODB
     # ==========================================================
@@ -240,6 +266,9 @@ def create_report():
     add_bullet("Filtra por propiedad de subdocumento 'especificaciones.tiempo_estimado_dias: { $lte: 2 }'. Retornó 3 servicios inmediatos.", "Consulta 2 (Subdocumento): ")
     add_bullet("Operadores '$and' y '$or' para recuperar servicios gratuitos de categorías académica o extracurricular. Retornó 3 servicios coincidentes.", "Consulta 3 (Lógica Compuesta): ")
 
+    img_mongo_1 = os.path.join(evid_dir, "mongodb", "01_mongo_insert_find.png")
+    add_figure(img_mongo_1, "Figura 2: Conexión mediante mongosh al contenedor campuscloud-mongodb, verificación de 8 documentos y consulta filtrada por array.")
+
     add_h2("4.3 Actualización y Eliminación Controlada")
     add_p("Se demostraron transiciones verificables antes y después de cada operación:")
     add_bullet("Se aplicó '$set' para reducir el tiempo de entrega de 3 a 2 días y '$addToSet' para insertar el requisito 'Identificación oficial escaneada en formato PDF' sin duplicidad.", "Actualización SRV-ACAD-01: ")
@@ -257,6 +286,9 @@ def create_report():
     ]
     add_custom_table(headers_agg, rows_agg, [1.4, 1.0, 1.2, 1.1, 1.8])
 
+    img_mongo_2 = os.path.join(evid_dir, "mongodb", "02_mongo_update_aggregation.png")
+    add_figure(img_mongo_2, "Figura 3: Ejecución de actualización atómica con $set y resultado del pipeline de agregación analítica con $group y $sort.")
+
     # ==========================================================
     # 6. EVIDENCIAS: NEO4J
     # ==========================================================
@@ -272,8 +304,14 @@ def create_report():
     add_bullet("Identifica qué alumnos están inscritos al mismo taller mediante el patrón '(e1)-[:SOLICITA]->(s)<-[:SOLICITA]-(e2)'. Se detectó conexión directa entre Mariano Silva, Carlos Gomez y Fernanda Torres.", "2. Detección de Compañeros: ")
     add_bullet("Algoritmo que localiza qué servicios han calificado con 4 o 5 estrellas los colaboradores directos de Mariano Silva que él aún no ha solicitado, sugiriendo con éxito 'Asesoría Académica' recomendada por Ana Martinez.", "3. Recomendación Colaborativa: ")
 
-    add_h2("5.2 Actualización de la Red")
-    add_p("Se actualizó la solicitud de Reexpedición de Credencial de Ana Martinez pasando su estado de 'En Proceso' a 'Aprobada' con calificación de 5, y se creó la nueva relación de alianza '(:Estudiante {matricula: \"2026006\"})-[:COLABORA_CON {proyecto: \"Defensa NoSQL\"}]->(:Estudiante {matricula: \"2026001\"})'.")
+    img_neo4j_1 = os.path.join(evid_dir, "neo4j", "01_neo4j_cypher_shell.png")
+    add_figure(img_neo4j_1, "Figura 4: Ejecución en cypher-shell verificando 11 nodos, 17 relaciones y el algoritmo de recomendación colaborativa.")
+
+    add_h2("5.2 Visualización Gráfica de la Red")
+    add_p("En Neo4j Browser, se ejecutó la consulta global para visualizar la red completa de relaciones. La interfaz despliega los nodos :Estudiante y :Servicio, permitiendo explorar interactivamente los atributos del estudiante Mariano Silva (matrícula 2026001) y sus trayectorias:")
+
+    img_neo4j_2 = os.path.join(evid_dir, "neo4j", "02_neo4j_browser_graph.png")
+    add_figure(img_neo4j_2, "Figura 5: Visualización interactiva en Neo4j Browser desplegando la red de alianzas, solicitudes de servicio y el inspector de propiedades.")
 
     # ==========================================================
     # 7. EVIDENCIAS: CASSANDRA
@@ -291,16 +329,22 @@ def create_report():
     add_bullet("Recuperación de los 5 eventos de Mariano Silva ordenados secuencialmente de forma descendente.", "Consulta por Partición: ")
     add_bullet("Filtrado temporal 'WHERE matricula = \"2026001\" AND fecha_hora >= \"2026-11-01\" AND fecha_hora <= \"2026-11-05\"', recuperando 3 eventos.", "Consulta por Intervalo: ")
 
+    img_cass_1 = os.path.join(evid_dir, "cassandra", "01_cassandra_cqlsh_select.png")
+    add_figure(img_cass_1, "Figura 6: Ejecución de consultas CQL en Cassandra ordenadas por clave de partición (matricula) y clustering temporal descendente.")
+
     add_h2("6.3 Operaciones UPDATE, DELETE y Mecanismo de Tombstones")
     add_bullet("En CQL, todo UPDATE y DELETE requiere suministrar la Clave Primaria Completa. Si no existe, Cassandra ejecuta un Upsert atómico sin realizar lecturas previas en disco.", "Restricción de Primary Key: ")
     add_bullet("El borrado no destruye inmediatamente los datos de la SSTable; escribe un 'Tombstone' que oculta el registro hasta que la compactación y el periodo 'gc_grace_seconds' purgan los bloques de almacenamiento.", "Tombstones: ")
+
+    img_cass_2 = os.path.join(evid_dir, "cassandra", "02_cassandra_update_delete.png")
+    add_figure(img_cass_2, "Figura 7: Modificación atómica de telemetría y eliminación controlada demostrando el mecanismo de tombstones en Apache Cassandra.")
 
     # ==========================================================
     # 8. PERSISTENCIA Y DIAGNÓSTICO
     # ==========================================================
     add_h1("7. Misión 5: Seguridad, Persistencia y Diagnóstico de Incidencias")
     add_p("Se ejecutaron pruebas destructivas controladas para demostrar la resiliencia de la plataforma:")
-    add_bullet("Se detuvieron y reiniciaron los contenedores con 'docker restart campuscloud-mongo' y 'docker restart campuscloud-neo4j'. Los 7 documentos y 11 nodos permanecieron intactos gracias al montaje en los volúmenes de Docker.", "Persistencia en Volúmenes: ")
+    add_bullet("Se detuvieron y reiniciaron los contenedores con 'docker restart campuscloud-mongodb' y 'docker restart campuscloud-neo4j'. Los 7 documentos y 11 nodos permanecieron intactos gracias al montaje en los volúmenes de Docker.", "Persistencia en Volúmenes: ")
     add_bullet("MongoDB opera bajo autenticación obligatoria ('admin'), Neo4j con contraseña cifrada y SQL Server con contraseñas seguras no triviales.", "Control de Acceso: ")
 
     add_h2("7.1 Incidencia Técnica Diagnosticada y Resuelta")
@@ -320,7 +364,7 @@ fatal: docker_images/neo.tar: smudge filter lfs failed""")
 
     headers_cloud = ["Aspecto Técnico", "Despliegue Local Docker", "AWS (Amazon Web Services)", "Microsoft Azure", "Google Cloud (GCP)"]
     rows_cloud = [
-        ["Motor Documental", "MongoDB 8.0 Community", "Amazon DocumentDB", "Azure Cosmos DB (Mongo API)", "Google Cloud Firestore"],
+        ["Motor Documental", "MongoDB 9.0 Community", "Amazon DocumentDB", "Azure Cosmos DB (Mongo API)", "Google Cloud Firestore"],
         ["Motor de Grafos", "Neo4j 5 Community", "Amazon Neptune", "Azure Cosmos DB (Gremlin)", "Spanner Graph"],
         ["Columnas Anchas", "Apache Cassandra 4.1", "Amazon Keyspaces (Cassandra)", "Azure Managed Cassandra", "Google Cloud Bigtable"],
         ["Alta Disponibilidad", "Nula (Monohost)", "Multi-AZ automático", "Multi-Región con 99.999% SLA", "Multi-Zona / Global"],
@@ -350,6 +394,11 @@ fatal: docker_images/neo.tar: smudge filter lfs failed""")
     doc.save(output_docx)
     print(f"[OK] Reporte DOCX generado exitosamente en: {output_docx}")
 
+    # Copiar DOCX a la raíz del proyecto
+    root_docx = os.path.join(base_proj, "Calzadilla_Mariano_ReportePracticas_NoSQL.docx")
+    import shutil
+    shutil.copy2(output_docx, root_docx)
+
     # Convertir a PDF si docx2pdf / Word COM está disponible
     output_pdf = os.path.abspath(os.path.join(os.path.dirname(__file__), "Calzadilla_Mariano_ReportePracticas_NoSQL.pdf"))
     try:
@@ -357,9 +406,13 @@ fatal: docker_images/neo.tar: smudge filter lfs failed""")
         print(f"Convirtiendo DOCX a PDF...")
         convert(output_docx, output_pdf)
         print(f"[OK] Reporte PDF generado exitosamente en: {output_pdf}")
+        
+        # Copiar PDF a la raíz del proyecto
+        root_pdf = os.path.join(base_proj, "Calzadilla_Mariano_ReportePracticas_NoSQL.pdf")
+        shutil.copy2(output_pdf, root_pdf)
+        print(f"[OK] Reporte PDF copiado a la raíz: {root_pdf}")
     except Exception as e:
         print(f"[AVISO] No se pudo convertir automáticamente a PDF mediante docx2pdf: {e}")
-        print(f"El archivo Word (.docx) está listo y puede ser exportado a PDF directamente desde Word o LibreOffice.")
 
 if __name__ == "__main__":
     create_report()
