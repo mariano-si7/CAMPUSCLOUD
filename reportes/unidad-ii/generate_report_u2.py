@@ -243,7 +243,7 @@ def create_report():
     add_bullet("Cada servicio cuenta con variables parametrizadas con valores por defecto seguros para pruebas reproducibles.", "Parametrización Limpia: ")
 
     img_docker = os.path.join(evid_dir, "generales", "01_docker_compose_ps.png")
-    add_figure(img_docker, "Figura 1: Estado operativo de todos los contenedores Docker de CampusCloud y diagnóstico del nodo Cassandra (UN - 100%).")
+    add_figure(img_docker, "Figura 1: Interfaz gráfica de Docker Desktop mostrando los 6 contenedores de CampusCloud activos, saludables y con sus puertos expuestos.")
 
     # ==========================================================
     # 5. EVIDENCIAS: MONGODB
@@ -267,7 +267,7 @@ def create_report():
     add_bullet("Operadores '$and' y '$or' para recuperar servicios gratuitos de categorías académica o extracurricular. Retornó 3 servicios coincidentes.", "Consulta 3 (Lógica Compuesta): ")
 
     img_mongo_1 = os.path.join(evid_dir, "mongodb", "01_mongo_insert_find.png")
-    add_figure(img_mongo_1, "Figura 2: Conexión mediante mongosh al contenedor campuscloud-mongodb, verificación de 8 documentos y consulta filtrada por array.")
+    add_figure(img_mongo_1, "Figura 2: Explorador de documentos BSON en MongoDB Compass sobre la colección detalles_servicios con el filtro { modalidades: 'En Línea' }.")
 
     add_h2("4.3 Actualización y Eliminación Controlada")
     add_p("Se demostraron transiciones verificables antes y después de cada operación:")
@@ -287,7 +287,7 @@ def create_report():
     add_custom_table(headers_agg, rows_agg, [1.4, 1.0, 1.2, 1.1, 1.8])
 
     img_mongo_2 = os.path.join(evid_dir, "mongodb", "02_mongo_update_aggregation.png")
-    add_figure(img_mongo_2, "Figura 3: Ejecución de actualización atómica con $set y resultado del pipeline de agregación analítica con $group y $sort.")
+    add_figure(img_mongo_2, "Figura 3: Constructor de Agregaciones en MongoDB Compass desplegando las etapas $match, $group y $sort con sus métricas calculadas.")
 
     # ==========================================================
     # 6. EVIDENCIAS: NEO4J
@@ -330,14 +330,14 @@ def create_report():
     add_bullet("Filtrado temporal 'WHERE matricula = \"2026001\" AND fecha_hora >= \"2026-11-01\" AND fecha_hora <= \"2026-11-05\"', recuperando 3 eventos.", "Consulta por Intervalo: ")
 
     img_cass_1 = os.path.join(evid_dir, "cassandra", "01_cassandra_cqlsh_select.png")
-    add_figure(img_cass_1, "Figura 6: Ejecución de consultas CQL en Cassandra ordenadas por clave de partición (matricula) y clustering temporal descendente.")
+    add_figure(img_cass_1, "Figura 6: Cliente TablePlus conectado a Apache Cassandra ejecutando consulta CQL por clave de partición (matricula) y clustering temporal descendente.")
 
     add_h2("6.3 Operaciones UPDATE, DELETE y Mecanismo de Tombstones")
     add_bullet("En CQL, todo UPDATE y DELETE requiere suministrar la Clave Primaria Completa. Si no existe, Cassandra ejecuta un Upsert atómico sin realizar lecturas previas en disco.", "Restricción de Primary Key: ")
     add_bullet("El borrado no destruye inmediatamente los datos de la SSTable; escribe un 'Tombstone' que oculta el registro hasta que la compactación y el periodo 'gc_grace_seconds' purgan los bloques de almacenamiento.", "Tombstones: ")
 
     img_cass_2 = os.path.join(evid_dir, "cassandra", "02_cassandra_update_delete.png")
-    add_figure(img_cass_2, "Figura 7: Modificación atómica de telemetría y eliminación controlada demostrando el mecanismo de tombstones en Apache Cassandra.")
+    add_figure(img_cass_2, "Figura 7: Consola interactiva cqlsh ejecutando modificación atómica de telemetría y eliminación controlada demostrando el mecanismo de tombstones.")
 
     # ==========================================================
     # 8. PERSISTENCIA Y DIAGNÓSTICO
