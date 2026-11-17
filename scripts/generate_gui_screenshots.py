@@ -152,7 +152,7 @@ html_docker_desktop = """<!DOCTYPE html>
           <div class="page-title">Containers / Apps</div>
           <div style="font-size: 11.5px; color: #788a9e; margin-top: 3px;">Project stack: <strong>CampusCloud (docker-compose)</strong> • Network: <strong>campuscloud-db-net</strong></div>
         </div>
-        <div class="badge-env">Mariano Calzadilla • 2026001</div>
+        <div class="badge-env">Mariano Calzadilla • 24300700</div>
       </div>
       <div class="table-box">
         <table>
@@ -532,7 +532,7 @@ html_cassandra_studio = """<!DOCTYPE html>
       <div class="dot-cass"></div>
       <span>campuscloud-cassandra:9042 • Keyspace: campuscloud_logs</span>
     </div>
-    <div style="font-size: 11px; color: #6e7681;">Mariano Calzadilla (2026001)</div>
+    <div style="font-size: 11px; color: #6e7681;">Mariano Calzadilla (24300700)</div>
   </div>
   <div class="body-pane">
     <div class="sidebar">
@@ -548,13 +548,13 @@ html_cassandra_studio = """<!DOCTYPE html>
     <div class="main-area">
       <div class="query-box">
         <div class="query-header">
-          <span>CQL Query Editor (Partition Key Query: matricula = '2026001')</span>
+          <span>CQL Query Editor (Partition Key Query: matricula = '24300700')</span>
           <button class="btn-run">▶ Run Query (F5)</button>
         </div>
         <div class="query-editor">
           <span class="cql-k">SELECT</span> matricula, fecha_hora, tipo_evento, modulo, estado, ip_origen, latencia_ms, detalles<br>
           <span class="cql-k">FROM</span> campuscloud_logs.eventos_estudiante<br>
-          <span class="cql-k">WHERE</span> matricula = <span class="cql-s">'2026001'</span>;
+          <span class="cql-k">WHERE</span> matricula = <span class="cql-s">'24300700'</span>;
         </div>
       </div>
       <div class="grid-pane">
@@ -577,7 +577,7 @@ html_cassandra_studio = """<!DOCTYPE html>
           </thead>
           <tbody>
             <tr>
-              <td style="color: #58a6ff;">2026001</td>
+              <td style="color: #58a6ff;">24300700</td>
               <td>2026-11-10 16:00:10</td>
               <td>CONSULTA_CATALOGO</td>
               <td>API Gateway</td>
@@ -587,7 +587,7 @@ html_cassandra_studio = """<!DOCTYPE html>
               <td>Consulta de ofertas de empleo y prácticas</td>
             </tr>
             <tr>
-              <td style="color: #58a6ff;">2026001</td>
+              <td style="color: #58a6ff;">24300700</td>
               <td>2026-11-06 14:20:45</td>
               <td>DESCARGA_DOCUMENTO</td>
               <td>Portal Estudiantil</td>
@@ -597,7 +597,7 @@ html_cassandra_studio = """<!DOCTYPE html>
               <td>Descarga de Certificado oficial en PDF</td>
             </tr>
             <tr>
-              <td style="color: #58a6ff;">2026001</td>
+              <td style="color: #58a6ff;">24300700</td>
               <td>2026-11-03 10:15:00</td>
               <td>SOLICITUD_SERVICIO</td>
               <td>Servicios Escolares</td>
@@ -607,7 +607,7 @@ html_cassandra_studio = """<!DOCTYPE html>
               <td>Solicitud de Certificado de Estudios</td>
             </tr>
             <tr>
-              <td style="color: #58a6ff;">2026001</td>
+              <td style="color: #58a6ff;">24300700</td>
               <td>2026-11-01 08:45:22</td>
               <td>SOLICITUD_SERVICIO</td>
               <td>Servicios Escolares</td>
@@ -617,7 +617,7 @@ html_cassandra_studio = """<!DOCTYPE html>
               <td>Inscripción a Taller de Cloud Computing</td>
             </tr>
             <tr>
-              <td style="color: #58a6ff;">2026001</td>
+              <td style="color: #58a6ff;">24300700</td>
               <td>2026-11-01 08:30:15</td>
               <td>LOGIN_AUTENTICACION</td>
               <td>Autenticación</td>

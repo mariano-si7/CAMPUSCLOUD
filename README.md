@@ -2,7 +2,7 @@
 
 Proyecto integrador de la asignatura **Bases de Datos en la Nube**  
 **Universidad Tecnológica de Tula-Tepeji (UTTT)**  
-**Alumno:** Mariano Calzadilla Alvarez (Matrícula: 2026001)
+**Alumno:** Mariano Calzadilla Alvarez (Matrícula: 24300700)
 
 ---
 
@@ -124,11 +124,3 @@ docker exec -i campuscloud-cassandra cqlsh < cassandra/03-consultas.cql
 docker exec -i campuscloud-cassandra cqlsh < cassandra/04-actualizar.cql
 docker exec -i campuscloud-cassandra cqlsh < cassandra/05-eliminar.cql
 ```
-
----
-
-## 5. Entregables Oficiales de la Misión
-
-- **Archivo ZIP para Classroom:** `Calzadilla_Mariano_NoSQL_Practicas_CampusCloud.zip` (generado automáticamente con `python scripts/package_submission.py`).
-- **Reporte Técnico PDF:** [Calzadilla_Mariano_ReportePracticas_NoSQL.pdf](reportes/unidad-ii/Calzadilla_Mariano_ReportePracticas_NoSQL.pdf) (generado con `python reportes/unidad-ii/generate_report_u2.py`).
-- **Repositorio GitHub:** [https://github.com/mariano-si7/CAMPUSCLOUD](https://github.com/mariano-si7/CAMPUSCLOUD)

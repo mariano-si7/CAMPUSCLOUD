@@ -12,7 +12,7 @@
 USE campuscloud_logs;
 
 -- ---------------------------------------------------------------
--- CONSULTA 1: Historial cronológico completo de Mariano Silva (2026001)
+-- CONSULTA 1: Historial cronológico completo de Mariano Silva (24300700)
 -- Eficiencia: O(1) en búsqueda de partición + lectura secuencial en disco
 -- ---------------------------------------------------------------
 SELECT 
@@ -25,7 +25,7 @@ SELECT
   latencia_ms, 
   detalles 
 FROM eventos_estudiante 
-WHERE matricula = '2026001';
+WHERE matricula = '24300700';
 
 -- ---------------------------------------------------------------
 -- CONSULTA 2: Actividad en un intervalo o periodo de fechas (01 al 05 de Nov)
@@ -40,7 +40,7 @@ SELECT
   latencia_ms, 
   detalles 
 FROM eventos_estudiante 
-WHERE matricula = '2026001' 
+WHERE matricula = '24300700' 
   AND fecha_hora >= '2026-11-01 00:00:00' 
   AND fecha_hora <= '2026-11-05 23:59:59';
 
@@ -54,7 +54,7 @@ SELECT
   tipo_evento, 
   detalles 
 FROM eventos_estudiante 
-WHERE matricula = '2026001' 
+WHERE matricula = '24300700' 
   AND fecha_hora = '2026-11-01 08:45:22' 
   AND id_evento = a1a1a1a1-2222-2222-2222-222222222222;
 

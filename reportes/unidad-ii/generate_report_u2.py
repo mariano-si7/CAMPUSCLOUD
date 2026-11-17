@@ -160,7 +160,7 @@ def create_report():
 
     meta_text = (
         "ALUMNO: Mariano Calzadilla Alvarez\n"
-        "MATRÍCULA: 2026001\n"
+        "MATRÍCULA: 24300700\n"
         "CARRERA: Ingeniería en Tecnologías de la Información e Innovación Digital\n"
         "GRUPO / CUATRIMESTRE: 7° Cuatrimestre\n"
         "DOCENTE: Mtro. de Asignatura de Bases de Datos en la Nube\n"
@@ -294,13 +294,13 @@ def create_report():
     # ==========================================================
     add_h1("5. Misión 3: Neo4j — Red de Grafos Vengadora")
     add_p("El módulo de grafos de CampusCloud modela las interacciones sociales y académicas de la comunidad universitaria. Se crearon 11 nodos y 17 aristas tipadas:")
-    add_bullet("Mariano Silva (2026001), Ana Martinez (2026002), Carlos Gomez (2026003), Diana Lopez (2026004), Eduardo Hernandez (2026005) y Fernanda Torres (2026006).", "6 Nodos :Estudiante: ")
+    add_bullet("Mariano Silva (24300700), Ana Martinez (2026002), Carlos Gomez (2026003), Diana Lopez (2026004), Eduardo Hernandez (2026005) y Fernanda Torres (2026006).", "6 Nodos :Estudiante: ")
     add_bullet("Certificado de Estudios, Reexpedición de Credencial, Inscripción a Taller, Baja Temporal y Asesoría Académica.", "5 Nodos :Servicio: ")
     add_bullet("':SOLICITA' (con propiedades de fecha, estado y calificación), ':COLABORA_CON' (proyectos y afinidad), ':TIENE_INTERES_EN' y ':PRERREQUISITO_DE'.", "17 Relaciones: ")
 
     add_h2("5.1 Consultas Cypher Estratégicas")
     add_p("Se formularon tres consultas para explotar el modelo de grafo:")
-    add_bullet("Recupera el historial de servicios de Mariano Silva ('2026001'), mostrando sus calificaciones (5 estrellas en Certificado y 4 en Taller).", "1. Historial del Alumno: ")
+    add_bullet("Recupera el historial de servicios de Mariano Silva ('24300700'), mostrando sus calificaciones (5 estrellas en Certificado y 4 en Taller).", "1. Historial del Alumno: ")
     add_bullet("Identifica qué alumnos están inscritos al mismo taller mediante el patrón '(e1)-[:SOLICITA]->(s)<-[:SOLICITA]-(e2)'. Se detectó conexión directa entre Mariano Silva, Carlos Gomez y Fernanda Torres.", "2. Detección de Compañeros: ")
     add_bullet("Algoritmo que localiza qué servicios han calificado con 4 o 5 estrellas los colaboradores directos de Mariano Silva que él aún no ha solicitado, sugiriendo con éxito 'Asesoría Académica' recomendada por Ana Martinez.", "3. Recomendación Colaborativa: ")
 
@@ -308,7 +308,7 @@ def create_report():
     add_figure(img_neo4j_1, "Figura 4: Ejecución en cypher-shell verificando 11 nodos, 17 relaciones y el algoritmo de recomendación colaborativa.")
 
     add_h2("5.2 Visualización Gráfica de la Red")
-    add_p("En Neo4j Browser, se ejecutó la consulta global para visualizar la red completa de relaciones. La interfaz despliega los nodos :Estudiante y :Servicio, permitiendo explorar interactivamente los atributos del estudiante Mariano Silva (matrícula 2026001) y sus trayectorias:")
+    add_p("En Neo4j Browser, se ejecutó la consulta global para visualizar la red completa de relaciones. La interfaz despliega los nodos :Estudiante y :Servicio, permitiendo explorar interactivamente los atributos del estudiante Mariano Silva (matrícula 24300700) y sus trayectorias:")
 
     img_neo4j_2 = os.path.join(evid_dir, "neo4j", "02_neo4j_browser_graph.png")
     add_figure(img_neo4j_2, "Figura 5: Visualización interactiva en Neo4j Browser desplegando la red de alianzas, solicitudes de servicio y el inspector de propiedades.")
@@ -320,14 +320,14 @@ def create_report():
     add_p("Para la ingesta continua de eventos y auditoría, se desplegó Apache Cassandra 4.1 con el keyspace 'campuscloud_logs' y la tabla 'eventos_estudiante'.")
 
     add_h2("6.1 Diseño Orientado a Consultas (Query-Driven Design)")
-    add_p("En Cassandra, la clave primaria define la distribución física y la velocidad de acceso:")
+    add_p("En Cassandra, la clave primaria define la distribución física y a la velocidad de acceso:")
     add_bullet("Al definir '((matricula))' como Partition Key, el 'Murmur3Partitioner' almacena todas las acciones de un estudiante en un único nodo del cluster, evitando escaneos globales distribuidos.", "Partition Key: ")
     add_bullet("Con '(fecha_hora, id_evento) WITH CLUSTERING ORDER BY (fecha_hora DESC)', los eventos se ordenan físicamente en las SSTables del más reciente al más antiguo, permitiendo lecturas instantáneas de la actividad reciente.", "Clustering Keys: ")
 
     add_h2("6.2 Inserción Masiva y Consultas")
-    add_p("Se insertaron 15 eventos cubriendo a Mariano Silva (2026001), Ana Martinez (2026002) y Carlos Gomez (2026003). Se ejecutaron exitosamente:")
+    add_p("Se insertaron 15 eventos cubriendo a Mariano Silva (24300700), Ana Martinez (2026002) y Carlos Gomez (2026003). Se ejecutaron exitosamente:")
     add_bullet("Recuperación de los 5 eventos de Mariano Silva ordenados secuencialmente de forma descendente.", "Consulta por Partición: ")
-    add_bullet("Filtrado temporal 'WHERE matricula = \"2026001\" AND fecha_hora >= \"2026-11-01\" AND fecha_hora <= \"2026-11-05\"', recuperando 3 eventos.", "Consulta por Intervalo: ")
+    add_bullet("Filtrado temporal 'WHERE matricula = \"24300700\" AND fecha_hora >= \"2026-11-01\" AND fecha_hora <= \"2026-11-05\"', recuperando 3 eventos.", "Consulta por Intervalo: ")
 
     img_cass_1 = os.path.join(evid_dir, "cassandra", "01_cassandra_cqlsh_select.png")
     add_figure(img_cass_1, "Figura 6: Cliente TablePlus conectado a Apache Cassandra ejecutando consulta CQL por clave de partición (matricula) y clustering temporal descendente.")

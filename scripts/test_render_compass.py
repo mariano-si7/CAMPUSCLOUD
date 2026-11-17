@@ -251,7 +251,7 @@ html_compass = """<!DOCTYPE html>
       <div class="conn-dot"></div>
       <span>localhost:27017 • CampusCloud (MongoDB 9.0)</span>
     </div>
-    <div style="font-size: 11px; color: #5d7582;">Mariano Calzadilla (2026001)</div>
+    <div style="font-size: 11px; color: #5d7582;">Mariano Calzadilla (24300700)</div>
   </div>
   <div class="body-container">
     <div class="sidebar">

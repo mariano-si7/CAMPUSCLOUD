@@ -307,7 +307,7 @@ Type :help for a list of available commands or :exit to exit the shell.
 1 row available after 3 ms, consumed after another 1 ms
 
 <span class="prompt">neo4j@neo4j&gt;</span> <span class="cmd">// Consulta Q3: Algoritmo de recomendación colaborativa para Mariano Silva
-            MATCH (yo:Estudiante {{matricula: '2026001'}})-[:COLABORA_CON]-(amigo:Estudiante)
+            MATCH (yo:Estudiante {{matricula: '24300700'}})-[:COLABORA_CON]-(amigo:Estudiante)
             MATCH (amigo)-[r:SOLICITA]-&gt;(s:Servicio)
             WHERE r.calificacion &gt;= 4
               AND NOT (yo)-[:SOLICITA]-&gt;(s)
@@ -623,7 +623,7 @@ html_neo4j_browser = """<!DOCTYPE html>
           <g>
             <circle cx="160" cy="120" r="26" class="node-estudiante" />
             <text x="160" y="117" class="node-text">Mariano S.</text>
-            <text x="160" y="129" class="node-subtext">2026001</text>
+            <text x="160" y="129" class="node-subtext">24300700</text>
           </g>
 
           <g>
@@ -691,7 +691,7 @@ html_neo4j_browser = """<!DOCTYPE html>
 
         <div class="inspector">
           <div class="inspector-title"><span>Node: :Estudiante</span><span>#0</span></div>
-          <div class="inspector-prop"><span>matricula</span><strong>"2026001"</strong></div>
+          <div class="inspector-prop"><span>matricula</span><strong>"24300700"</strong></div>
           <div class="inspector-prop"><span>nombre</span><strong>"Mariano Silva"</strong></div>
           <div class="inspector-prop"><span>carrera</span><strong>"TI - Nube"</strong></div>
           <div class="inspector-prop"><span>semestre</span><strong>7</strong></div>
@@ -731,15 +731,15 @@ Use HELP for help.
 <span class="prompt">cqlsh&gt;</span> <span class="cmd">USE campuscloud_logs;</span>
 
 <span class="prompt">cqlsh:campuscloud_logs&gt;</span> <span class="cmd">SELECT matricula, fecha_hora, tipo_evento, modulo, estado, ip_origen, latencia_ms, detalles
-                       FROM eventos_estudiante WHERE matricula = '2026001';</span>
+                       FROM eventos_estudiante WHERE matricula = '24300700';</span>
 
  matricula | fecha_hora                      | tipo_evento         | modulo              | estado  | ip_origen     | latencia_ms | detalles
 -----------+---------------------------------+---------------------+---------------------+---------+---------------+-------------+------------------------------------------------
-   <span class="info">2026001</span> | 2026-11-10 16:00:10.000000+0000 |   CONSULTA_CATALOGO |         API Gateway | <span class="success">EXITOSO</span> | 10.50.149.121 |          <span class="num">28</span> |      Consulta de ofertas de empleo y practicas
-   <span class="info">2026001</span> | 2026-11-06 14:20:45.000000+0000 |  DESCARGA_DOCUMENTO |  Portal Estudiantil | <span class="success">EXITOSO</span> | 10.50.149.121 |         <span class="num">350</span> | Descarga de Certificado oficial en formato PDF
-   <span class="info">2026001</span> | 2026-11-03 10:15:00.000000+0000 |  SOLICITUD_SERVICIO | Servicios Escolares | <span class="success">EXITOSO</span> | 10.50.149.121 |          <span class="num">98</span> |           Solicitud de Certificado de Estudios
-   <span class="info">2026001</span> | 2026-11-01 08:45:22.000000+0000 |  SOLICITUD_SERVICIO | Servicios Escolares | <span class="success">EXITOSO</span> | 10.50.149.121 |         <span class="num">120</span> |        Inscripcion a Taller de Cloud Computing
-   <span class="info">2026001</span> | 2026-11-01 08:30:15.000000+0000 | LOGIN_AUTENTICACION |       Autenticacion | <span class="success">EXITOSO</span> | 10.50.149.121 |          <span class="num">45</span> |        Inicio de sesion institucional correcto
+   <span class="info">24300700</span> | 2026-11-10 16:00:10.000000+0000 |   CONSULTA_CATALOGO |         API Gateway | <span class="success">EXITOSO</span> | 10.50.149.121 |          <span class="num">28</span> |      Consulta de ofertas de empleo y practicas
+   <span class="info">24300700</span> | 2026-11-06 14:20:45.000000+0000 |  DESCARGA_DOCUMENTO |  Portal Estudiantil | <span class="success">EXITOSO</span> | 10.50.149.121 |         <span class="num">350</span> | Descarga de Certificado oficial en formato PDF
+   <span class="info">24300700</span> | 2026-11-03 10:15:00.000000+0000 |  SOLICITUD_SERVICIO | Servicios Escolares | <span class="success">EXITOSO</span> | 10.50.149.121 |          <span class="num">98</span> |           Solicitud de Certificado de Estudios
+   <span class="info">24300700</span> | 2026-11-01 08:45:22.000000+0000 |  SOLICITUD_SERVICIO | Servicios Escolares | <span class="success">EXITOSO</span> | 10.50.149.121 |         <span class="num">120</span> |        Inscripcion a Taller de Cloud Computing
+   <span class="info">24300700</span> | 2026-11-01 08:30:15.000000+0000 | LOGIN_AUTENTICACION |       Autenticacion | <span class="success">EXITOSO</span> | 10.50.149.121 |          <span class="num">45</span> |        Inicio de sesion institucional correcto
 
 (5 rows)
 

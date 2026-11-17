@@ -10,9 +10,9 @@
 
 // ---------------------------------------------------------------
 // CONSULTA 1: Servicios usados / solicitados por un estudiante
-// Contexto: Conocer el historial académico de 'Mariano Silva' (2026001)
+// Contexto: Conocer el historial académico de 'Mariano Silva' (24300700)
 // ---------------------------------------------------------------
-MATCH (e:Estudiante {matricula: '2026001'})-[r:SOLICITA]->(s:Servicio)
+MATCH (e:Estudiante {matricula: '24300700'})-[r:SOLICITA]->(s:Servicio)
 RETURN 
   e.nombre AS Estudiante,
   e.carrera AS Carrera,
@@ -40,10 +40,10 @@ RETURN
 
 // ---------------------------------------------------------------
 // CONSULTA 3: Algoritmo de Recomendación Basado en Alianzas de Grafos
-// Contexto: Recomendar a 'Mariano Silva' (2026001) servicios que sus colaboradores
+// Contexto: Recomendar a 'Mariano Silva' (24300700) servicios que sus colaboradores
 // directos han utilizado con éxito (calificación >= 4) y que Mariano aún no solicita.
 // ---------------------------------------------------------------
-MATCH (target:Estudiante {matricula: '2026001'})-[:COLABORA_CON]-(colaborador:Estudiante)
+MATCH (target:Estudiante {matricula: '24300700'})-[:COLABORA_CON]-(colaborador:Estudiante)
 MATCH (colaborador)-[r:SOLICITA]->(recomendado:Servicio)
 WHERE NOT (target)-[:SOLICITA]->(recomendado) 
   AND (r.calificacion >= 4 OR r.estado = 'Aprobada')

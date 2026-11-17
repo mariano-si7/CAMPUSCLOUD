@@ -19,7 +19,7 @@ FOR (s:Servicio) REQUIRE s.id_servicio IS UNIQUE;
 // 3. Creación de Nodos Estudiante (Basados exactamente en SQL Server dbo.Estudiantes)
 CREATE (e1:Estudiante {
   id_estudiante: 1,
-  matricula: '2026001',
+  matricula: '24300700',
   nombre: 'Mariano Silva',
   correo: 'mariano.silva@campuscloud.edu',
   carrera: 'Tecnologías de la Información',
@@ -117,10 +117,10 @@ CREATE (s5:Servicio {
 // 5. Creación de Relaciones con Propiedades
 
 // 5.1 Relaciones :SOLICITA (Derivadas de las Solicitudes reales en SQL Server)
-MATCH (e:Estudiante {matricula: '2026001'}), (s:Servicio {id_servicio: 1})
+MATCH (e:Estudiante {matricula: '24300700'}), (s:Servicio {id_servicio: 1})
 CREATE (e)-[:SOLICITA {id_solicitud: 1, fecha: '2026-11-03', estado: 'Aprobada', calificacion: 5}]->(s);
 
-MATCH (e:Estudiante {matricula: '2026001'}), (s:Servicio {id_servicio: 3})
+MATCH (e:Estudiante {matricula: '24300700'}), (s:Servicio {id_servicio: 3})
 CREATE (e)-[:SOLICITA {id_solicitud: 11, fecha: '2026-11-01', estado: 'Aprobada', calificacion: 4}]->(s);
 
 MATCH (e:Estudiante {matricula: '2026002'}), (s:Servicio {id_servicio: 2})
@@ -151,17 +151,17 @@ MATCH (e:Estudiante {matricula: '2026006'}), (s:Servicio {id_servicio: 3})
 CREATE (e)-[:SOLICITA {id_solicitud: 16, fecha: '2026-11-08', estado: 'Aprobada', calificacion: 4}]->(s);
 
 // 5.2 Relaciones de Alianzas y Colaboración entre Estudiantes (:COLABORA_CON)
-MATCH (e1:Estudiante {matricula: '2026001'}), (e2:Estudiante {matricula: '2026002'})
+MATCH (e1:Estudiante {matricula: '24300700'}), (e2:Estudiante {matricula: '2026002'})
 CREATE (e1)-[:COLABORA_CON {proyecto: 'Arquitectura CampusCloud', afinidad: 'Alta', rol_lider: 'Mariano'}]->(e2);
 
 MATCH (e2:Estudiante {matricula: '2026002'}), (e4:Estudiante {matricula: '2026004'})
 CREATE (e2)-[:COLABORA_CON {proyecto: 'Proyecto Integrador NoSQL', afinidad: 'Muy Alta', rol_lider: 'Ana'}]->(e4);
 
-MATCH (e1:Estudiante {matricula: '2026001'}), (e5:Estudiante {matricula: '2026005'})
+MATCH (e1:Estudiante {matricula: '24300700'}), (e5:Estudiante {matricula: '2026005'})
 CREATE (e1)-[:COLABORA_CON {proyecto: 'Tutorías de Programación', afinidad: 'Media', rol_lider: 'Mariano'}]->(e5);
 
 // 5.3 Relaciones de Interés Académico (:TIENE_INTERES_EN)
-MATCH (e1:Estudiante {matricula: '2026001'}), (s:Servicio {id_servicio: 5})
+MATCH (e1:Estudiante {matricula: '24300700'}), (s:Servicio {id_servicio: 5})
 CREATE (e1)-[:TIENE_INTERES_EN {motivo: 'Reforzar arquitectura cloud', prioridad: 'Alta'}]->(s);
 
 MATCH (e3:Estudiante {matricula: '2026003'}), (s:Servicio {id_servicio: 1})

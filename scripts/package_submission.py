@@ -56,7 +56,7 @@ def package_submission():
 
     # 6. README.md para la entrega reducida
     readme_content = f"""# Portafolio Reducido de Prácticas NoSQL - CampusCloud
-Alumno: Mariano Calzadilla Alvarez (Matrícula: 2026001)
+Alumno: Mariano Calzadilla Alvarez (Matrícula: 24300700)
 Asignatura: Bases de Datos en la Nube
 Unidad II - Actividad de Evaluación 2 (55 %)
 

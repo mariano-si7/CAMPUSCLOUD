@@ -27,7 +27,7 @@ SET
   r.folio_digital = 'CRE-2026-002-OK';
 
 // 3. EXPANSIÓN DE LA RED: NUEVA ALIANZA DE CIBERSEGURIDAD
-MATCH (e_fer:Estudiante {matricula: '2026006'}), (e_mar:Estudiante {matricula: '2026001'})
+MATCH (e_fer:Estudiante {matricula: '2026006'}), (e_mar:Estudiante {matricula: '24300700'})
 MERGE (e_fer)-[c:COLABORA_CON {proyecto: 'Defensa de Infraestructura NoSQL'}]->(e_mar)
 ON CREATE SET c.afinidad = 'Muy Alta', c.fecha_inicio = '2026-11-16';
 
