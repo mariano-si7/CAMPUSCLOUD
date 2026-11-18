@@ -306,7 +306,7 @@ Type :help for a list of available commands or :exit to exit the shell.
 +-----------------+
 1 row available after 3 ms, consumed after another 1 ms
 
-<span class="prompt">neo4j@neo4j&gt;</span> <span class="cmd">// Consulta Q3: Algoritmo de recomendación colaborativa para Mariano Silva
+<span class="prompt">neo4j@neo4j&gt;</span> <span class="cmd">// Consulta Q3: Algoritmo de recomendación colaborativa para Mariano Calzadilla Alvarez
             MATCH (yo:Estudiante {{matricula: '24300700'}})-[:COLABORA_CON]-(amigo:Estudiante)
             MATCH (amigo)-[r:SOLICITA]-&gt;(s:Servicio)
             WHERE r.calificacion &gt;= 4
@@ -692,7 +692,7 @@ html_neo4j_browser = """<!DOCTYPE html>
         <div class="inspector">
           <div class="inspector-title"><span>Node: :Estudiante</span><span>#0</span></div>
           <div class="inspector-prop"><span>matricula</span><strong>"24300700"</strong></div>
-          <div class="inspector-prop"><span>nombre</span><strong>"Mariano Silva"</strong></div>
+          <div class="inspector-prop"><span>nombre</span><strong>"Mariano Calzadilla Alvarez"</strong></div>
           <div class="inspector-prop"><span>carrera</span><strong>"TI - Nube"</strong></div>
           <div class="inspector-prop"><span>semestre</span><strong>7</strong></div>
           <div class="inspector-prop"><span>promedio</span><strong>9.6</strong></div>

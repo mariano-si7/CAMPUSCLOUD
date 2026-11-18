@@ -12,7 +12,7 @@
 USE campuscloud_logs;
 
 -- ---------------------------------------------------------------
--- CONSULTA 1: Historial cronológico completo de Mariano Silva (24300700)
+-- CONSULTA 1: Historial cronológico completo de Mariano Calzadilla Alvarez (24300700)
 -- Eficiencia: O(1) en búsqueda de partición + lectura secuencial en disco
 -- ---------------------------------------------------------------
 SELECT 

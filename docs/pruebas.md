@@ -36,8 +36,8 @@ Este documento registra la batería de pruebas funcionales, resultados obtenidos
 | Identificador | Operación | Comando / Script | Resultado Esperado | Validación Técnica |
 | :--- | :--- | :--- | :--- | :--- |
 | **TEST-NEO-01** | Creación del Grafo | `neo4j/01-crear-nodos-relaciones.cypher` | 6 Nodos `:Estudiante`, 5 Nodos `:Servicio`, 17 Relaciones (`:SOLICITA`, `:COLABORA_CON`, etc.). | `Added 11 nodes, 17 relationships`. |
-| **TEST-NEO-02** | Consulta Servicios Alumno | `neo4j/02-consultas.cypher` (Q1) | Historial de solicitudes de Mariano Silva (`24300700`). | 2 servicios: Certificado (5 estrellas) y Taller (4 estrellas). |
-| **TEST-NEO-03** | Detección de Comunidades | `neo4j/02-consultas.cypher` (Q2) | Estudiantes que comparten `Inscripción a Taller`. | Mariano Silva, Carlos Gomez y Fernanda Torres identificados como compañeros de servicio. |
+| **TEST-NEO-02** | Consulta Servicios Alumno | `neo4j/02-consultas.cypher` (Q1) | Historial de solicitudes de Mariano Calzadilla Alvarez (`24300700`). | 2 servicios: Certificado (5 estrellas) y Taller (4 estrellas). |
+| **TEST-NEO-03** | Detección de Comunidades | `neo4j/02-consultas.cypher` (Q2) | Estudiantes que comparten `Inscripción a Taller`. | Mariano Calzadilla Alvarez, Carlos Gomez y Fernanda Torres identificados como compañeros de servicio. |
 | **TEST-NEO-04** | Recomendación Colaborativa | `neo4j/02-consultas.cypher` (Q3) | Servicios de colaboradores afines sugeridos a Mariano. | Sugiere `Asesoría Académica` (solicitada con éxito por su colaboradora Ana Martinez). |
 | **TEST-NEO-05** | Actualización de Grafo | `neo4j/03-actualizacion.cypher` | Transiciona estado de solicitud a `Aprobada` y agrega nueva alianza. | `Set 4 properties, Added 1 relationship`. |
 
@@ -59,8 +59,8 @@ Este documento registra la batería de pruebas funcionales, resultados obtenidos
 | :--- | :--- | :--- | :--- | :--- |
 | **TEST-CAS-01** | Creación de Keyspace y Tabla | `cassandra/01-crear-keyspace-tabla.cql` | Keyspace `campuscloud_logs` y tabla `eventos_estudiante` con PK `((matricula), fecha_hora, id_evento)`. | Tabla creada con `CLUSTERING ORDER BY (fecha_hora DESC)`. |
 | **TEST-CAS-02** | Carga de Eventos Masivos | `cassandra/02-insertar-eventos.cql` | 15 eventos registrados para 3 estudiantes (`24300700`, `2026002`, `2026003`). | `count(*) = 15`. |
-| **TEST-CAS-03** | Consulta Partición Completa | `cassandra/03-consultas.cql` (Q1) | Todos los eventos de Mariano Silva ordenados del más reciente al más antiguo. | 5 eventos ordenados desc por `fecha_hora`. |
-| **TEST-CAS-04** | Consulta Rango de Fechas | `cassandra/03-consultas.cql` (Q2) | Eventos de Mariano Silva entre `2026-11-01` y `2026-11-05`. | 3 eventos recuperados de forma secuencial. |
+| **TEST-CAS-03** | Consulta Partición Completa | `cassandra/03-consultas.cql` (Q1) | Todos los eventos de Mariano Calzadilla Alvarez ordenados del más reciente al más antiguo. | 5 eventos ordenados desc por `fecha_hora`. |
+| **TEST-CAS-04** | Consulta Rango de Fechas | `cassandra/03-consultas.cql` (Q2) | Eventos de Mariano Calzadilla Alvarez entre `2026-11-01` y `2026-11-05`. | 3 eventos recuperados de forma secuencial. |
 | **TEST-CAS-05** | UPDATE con PK Completa | `cassandra/04-actualizar.cql` | Actualiza estado a `APROBADA` y latencia a `85 ms` para evento de Ana Martinez. | Registro actualizado atómicamente por clave compuesta. |
 | **TEST-CAS-06** | DELETE con PK Completa | `cassandra/05-eliminar.cql` | Elimina evento fallido de Carlos Gomez. | Registro ocultado mediante Tombstone; total restante para ese alumno: 4. |
 

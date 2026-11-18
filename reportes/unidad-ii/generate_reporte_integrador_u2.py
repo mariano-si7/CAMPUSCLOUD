@@ -363,7 +363,7 @@ def create_reporte_integrador():
 
     add_p("Consulta Esencial Explicada (Algoritmo de Recomendación Colaborativa):", "Código del script 'neo4j/02-consultas.cypher' (Q3): ")
     add_code_block(doc,
-"""// Localizar pares de Mariano Silva (24300700) y recomendar servicios altamente valorados
+"""// Localizar pares de Mariano Calzadilla Alvarez (24300700) y recomendar servicios altamente valorados
 MATCH (yo:Estudiante {matricula: '24300700'})-[:COLABORA_CON]-(amigo:Estudiante)
 MATCH (amigo)-[r:SOLICITA]->(s:Servicio)
 WHERE r.calificacion >= 4
@@ -396,7 +396,7 @@ CREATE TABLE campuscloud_logs.eventos_estudiante (
     detalles text,
     PRIMARY KEY ((matricula), fecha_hora, id_evento)
 ) WITH CLUSTERING ORDER BY (fecha_hora DESC, id_evento ASC);""")
-    add_p("Interpretación Técnica: La Partition Key está dada por '((matricula))'. El algoritmo 'Murmur3Partitioner' distribuye todas las acciones de un estudiante específico al mismo nodo físico del clúster. Las Clustering Keys ('fecha_hora DESC, id_evento ASC') ordenan físicamente las filas dentro de los archivos SSTable de manera descendente. Esto permite que la consulta para auditar la actividad reciente de Mariano Silva ('24300700') sea una lectura secuencial contigua en disco, sin necesidad de calcular un 'ORDER BY' en memoria.")
+    add_p("Interpretación Técnica: La Partition Key está dada por '((matricula))'. El algoritmo 'Murmur3Partitioner' distribuye todas las acciones de un estudiante específico al mismo nodo físico del clúster. Las Clustering Keys ('fecha_hora DESC, id_evento ASC') ordenan físicamente las filas dentro de los archivos SSTable de manera descendente. Esto permite que la consulta para auditar la actividad reciente de Mariano Calzadilla Alvarez ('24300700') sea una lectura secuencial contigua en disco, sin necesidad de calcular un 'ORDER BY' en memoria.")
 
     img_cass_1 = os.path.join(evid_dir, "cassandra", "01_cassandra_cqlsh_select.png")
     add_figure(img_cass_1, "Figura 6: Cliente visual TablePlus conectado a Cassandra ejecutando consulta particionada por matricula 24300700 con orden descendente.")

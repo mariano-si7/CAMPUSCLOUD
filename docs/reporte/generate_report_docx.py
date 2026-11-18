@@ -128,7 +128,7 @@ def create_report():
         ("Asignatura:", "Bases de Datos en la Nube"),
         ("Unidad:", "Unidad I: Bases de datos relacionales en la nube"),
         ("Proyecto:", "CampusCloud (Nube Académica Local)"),
-        ("Estudiante:", "Mariano Silva"),
+        ("Estudiante:", "Mariano Calzadilla Alvarez"),
         ("Docente:", "Profesor Titular de la Asignatura"),
         ("Fecha de Entrega:", "Octubre de 2026")
     ]
@@ -395,7 +395,7 @@ def create_report():
     add_code_block(doc,
         "-- 1. Operación Permitida para user_consulta:\n"
         "SELECT TOP 1 Nombre FROM Estudiantes;\n"
-        "--> Resultado: 'Mariano Silva' (Ejecución exitosa)\n\n"
+        "--> Resultado: 'Mariano Calzadilla Alvarez' (Ejecución exitosa)\n\n"
         "-- 2. Operación Denegada para user_consulta:\n"
         "INSERT INTO Estudiantes (Matricula, Nombre, Correo) VALUES ('2026999', 'Prueba', 'p@campus.edu');\n"
         "--> Respuesta del motor SQL Server:\n"

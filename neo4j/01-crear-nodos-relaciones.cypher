@@ -20,8 +20,8 @@ FOR (s:Servicio) REQUIRE s.id_servicio IS UNIQUE;
 CREATE (e1:Estudiante {
   id_estudiante: 1,
   matricula: '24300700',
-  nombre: 'Mariano Silva',
-  correo: 'mariano.silva@campuscloud.edu',
+  nombre: 'Mariano Calzadilla Alvarez',
+  correo: 'mariano.calzadilla@campuscloud.edu',
   carrera: 'Tecnologías de la Información',
   cuatrimestre: 7,
   promedio: 9.4

@@ -9,7 +9,7 @@
 USE campuscloud_logs;
 
 -- ===============================================================
--- 1. EVENTOS ESTUDIANTE: Mariano Silva (24300700)
+-- 1. EVENTOS ESTUDIANTE: Mariano Calzadilla Alvarez (24300700)
 -- ===============================================================
 INSERT INTO eventos_estudiante (
   matricula, fecha_hora, id_evento, tipo_evento, id_servicio_sql, modulo, ip_origen, dispositivo, estado, latencia_ms, detalles

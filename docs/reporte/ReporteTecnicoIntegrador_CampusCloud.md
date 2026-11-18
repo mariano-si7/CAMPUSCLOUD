@@ -3,7 +3,7 @@
 ### ASIGNATURA: BASES DE DATOS EN LA NUBE
 **UNIDAD I:** Bases de datos relacionales en la nube  
 **ACTIVIDAD DE EVALUACIÓN 3:** Reporte técnico integrador - De CampusCloud local a la nube administrada  
-**ESTUDIANTE:** Mariano Silva  
+**ESTUDIANTE:** Mariano Calzadilla Alvarez  
 **GRUPO:** TI - Bases de Datos en la Nube  
 **DOCENTE:** Mtro. Asignatura  
 **FECHA:** Octubre 2026  
@@ -198,7 +198,7 @@ La base de datos **CampusCloud** fue estructurada para gestionar solicitudes de 
 Se implementaron y ejecutaron de manera controlada las operaciones básicas de manipulación de datos (CRUD) y consultas analíticas multicapa.
 
 ### 5.1 Datos Iniciales Registrados
-- **10 Estudiantes:** Registros del alumno `2026001` (Mariano Silva) al `2026010` (Jessica Vargas).
+- **10 Estudiantes:** Registros del alumno `2026001` (Mariano Calzadilla Alvarez) al `2026010` (Jessica Vargas).
 - **5 Servicios:** Certificado de Estudios, Reexpedición de Credencial, Inscripción a Taller, Baja Temporal y Asesoría Académica.
 - **15 Solicitudes:** Mapeo de solicitudes distribuidas con diferentes estados administrativos.
 
@@ -298,7 +298,7 @@ Aplicando el estándar de la industria del **Principio de Mínimo Privilegio (Po
    ```sql
    -- Ejecutado con credenciales de user_consulta
    SELECT TOP 1 Nombre FROM Estudiantes;
-   -- Resultado: Ejecución exitosa (Retorna 'Mariano Silva').
+   -- Resultado: Ejecución exitosa (Retorna 'Mariano Calzadilla Alvarez').
    ```
 
 2. **Operación Rechazada por Falta de Privilegios para `user_consulta`:**

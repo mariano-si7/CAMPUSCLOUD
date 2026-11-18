@@ -15,7 +15,7 @@ Alineado con la Sección 4 de la *Guía de organización del repositorio CampusC
 ## 2. Neo4j (`evidencias/unidad-ii/neo4j/`)
 - `01-conexion-browser.png`: Acceso a la interfaz web Neo4j Browser (`localhost:7474`).
 - `02-nodos-relaciones-grafo.png`: Visualización gráfica de la red completa (nodos Estudiante, Servicio y relaciones).
-- `03-consulta-servicios-estudiante.png`: Tabla de resultados de servicios solicitados por Mariano Silva (`2026001`).
+- `03-consulta-servicios-estudiante.png`: Tabla de resultados de servicios solicitados por Mariano Calzadilla Alvarez (`2026001`).
 - `04-consulta-estudiantes-compartidos.png`: Identificación de alumnos que comparten el taller extracurricular.
 - `05-consulta-recomendacion.png`: Salida de la recomendación de servicios basada en colaboradores afines.
 - `06-actualizacion-antes-despues.png`: Modificación del estado de solicitud y nueva alianza creada.

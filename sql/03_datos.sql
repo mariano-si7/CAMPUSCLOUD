@@ -4,7 +4,7 @@ GO
 
 -- 1. Insertar 10 Estudiantes
 INSERT INTO Estudiantes (Matricula, Nombre, Correo) VALUES
-('2026001', 'Mariano Silva', 'mariano.silva@campuscloud.edu'),
+('2026001', 'Mariano Calzadilla Alvarez', 'mariano.calzadilla@campuscloud.edu'),
 ('2026002', 'Ana Martinez', 'ana.martinez@campuscloud.edu'),
 ('2026003', 'Carlos Gomez', 'carlos.gomez@campuscloud.edu'),
 ('2026004', 'Diana Lopez', 'diana.lopez@campuscloud.edu'),
